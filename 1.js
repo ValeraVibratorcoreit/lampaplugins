@@ -166,13 +166,23 @@
             </div>
         `);
 
-        Lampa.Listener.follow('app', function(e) {
-            if (e.type == 'ready') {
-                Lampa.Menu.add({
+        function addYoutubeMenuItem() {
+            var button = $("<li class=\"menu__item selector\" data-action=\"youtube_plugin\">\n                <div class=\"menu__ico\">\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-youtube\"><path d=\"M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z\"/><path d=\"M10 15.25l5.19-3.5-5.19-3.5z\"/></svg>\n                </div>\n                <div class=\"menu__text\">" + Lampa.Lang.translate('youtube_title') + "</div>\n            </li>");
+
+            button.on('hover:enter', function() {
+                Lampa.Activity.push({
                     title: Lampa.Lang.translate('youtube_title'),
                     component: 'youtube_plugin',
-                    icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><path d="M10 15.25l5.19-3.5-5.19-3.5z"/></svg>'
+                    page: 1
                 });
+            });
+
+            $('.menu .menu__list').eq(0).append(button);
+        }
+
+        Lampa.Listener.follow('app', function(e) {
+            if (e.type == 'ready') {
+                addYoutubeMenuItem();
             }
         });
     }
