@@ -9,6 +9,7 @@
         var scroll = new Lampa.Scroll({mask: true, over: true});
         var files = new Lampa.Explorer(object);
         var search_input;
+        var root_element; // Добавляем переменную для корневого DOM-элемента
 
         this.create = function() {
             search_input = $(Lampa.Template.get('lampac_search_input', {title: Lampa.Lang.translate('youtube_search_placeholder')}));
@@ -25,7 +26,12 @@
 
             files.appendHead(search_input);
             files.appendFiles(scroll.render());
-            return files.render();
+            root_element = files.render(); // Сохраняем DOM-элемент
+            // return true; // Можно ничего не возвращать или возвращать true
+        };
+
+        this.render = function() {
+            return root_element; // Lampa будет вызывать этот метод для получения DOM-элемента компонента
         };
 
         this.start = function() {
